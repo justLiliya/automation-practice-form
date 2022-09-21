@@ -32,14 +32,14 @@ public class AutomationPracticeFormTest {
         }
     }
 
-    public void SetUp() {
+    public void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
         Configuration.holdBrowserOpen = true;
     }
 
     @Test
-    public void FillAutomationPracticeFormTest() {
+    public void fillAutomationPracticeFormTest() {
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue(name);
         $("#lastName").setValue(lastName);
