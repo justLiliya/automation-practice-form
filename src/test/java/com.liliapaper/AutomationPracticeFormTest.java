@@ -21,17 +21,6 @@ public class AutomationPracticeFormTest {
     String subjects = faker.artist().name();
     String currentAddress = faker.address().streetAddress();
 
-    {
-        try {
-            if (file.createNewFile())
-                System.out.println("File created");
-            else
-                System.out.println("File already exists");
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-    }
-
     public void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
@@ -74,9 +63,5 @@ public class AutomationPracticeFormTest {
         $(".table-responsive table").shouldHave(text("Uttar Pradesh Agra"));
 
         $("#closeLargeModal").click();
-    }
-
-    public void tearDown() {
-        file.delete();
     }
 }
