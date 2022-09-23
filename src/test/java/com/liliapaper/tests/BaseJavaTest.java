@@ -1,4 +1,4 @@
-package com.liliapaper;
+package com.liliapaper.tests;
 
 import org.junit.jupiter.api.Test;
 
