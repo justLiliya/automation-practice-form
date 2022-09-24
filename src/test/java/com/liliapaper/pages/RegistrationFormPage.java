@@ -3,6 +3,7 @@ package com.liliapaper.pages;
 import com.codeborne.selenide.SelenideElement;
 import com.liliapaper.pages.components.AddressComponent;
 import com.liliapaper.pages.components.CalendComponent;
+import com.liliapaper.pages.components.ResultTableComponent;
 import com.liliapaper.pages.components.UserComponent;
 
 import java.io.File;
@@ -18,6 +19,8 @@ public class RegistrationFormPage {
     CalendComponent calendComponent = new CalendComponent();
     UserComponent userComponent = new UserComponent();
     AddressComponent addressComponent = new AddressComponent();
+    ResultTableComponent resultTableComponent = new ResultTableComponent();
+
     //Elements
     private SelenideElement
             mail = $("#userEmail"),
@@ -29,7 +32,6 @@ public class RegistrationFormPage {
             address = $("#currentAddress"),
             stateField = $("#state"),
             cityField = $("#city"),
-            table = $(".table-responsive table"),
             closeButton = $("#closeLargeModal"),
             submitButton = $("#submit");
 
@@ -88,17 +90,7 @@ public class RegistrationFormPage {
     }
 
     public void assertFormsfields(String name, String lastName, String userMail, String userNumber, String month, String year, String subjects, String currentAddress, String state, String city, String gender, String day, String hobb) {
-        table.shouldHave(text(name),
-                (text(lastName)),
-                (text(userMail)),
-                (text(gender)),
-                (text(userNumber)),
-                (text(day + " " + month + "," + year)),
-                (text(subjects)),
-                (text(hobb)),
-                (text("Photo.png")),
-                (text(currentAddress)),
-                (text(state + " " + city)));
+        resultTableComponent.checkResult(name, lastName, userMail, userNumber, month, year, subjects, currentAddress, state, city, gender, day, hobb);
     }
 
     public void closeForm() {
