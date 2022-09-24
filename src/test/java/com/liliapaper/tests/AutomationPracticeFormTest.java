@@ -50,7 +50,8 @@ public class AutomationPracticeFormTest {
                 .submit();
 
         //проверка полей во всплывающем окне
-        registrationFormPage.assertFormsfields(name, lastName, userMail, userNumber, month, year, subjects, currentAddress, state, city, gender, day, hobb);
+        registrationFormPage
+                .assertFormsfields(name, lastName, userMail, userNumber, month, year, subjects, currentAddress, state, city, gender, day, hobb);
 
         //закрытие итоговой формы
         registrationFormPage.closeForm();

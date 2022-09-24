@@ -1,6 +1,9 @@
 package com.liliapaper.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.liliapaper.pages.components.AddressComponent;
+import com.liliapaper.pages.components.CalendComponent;
+import com.liliapaper.pages.components.UserComponent;
 
 import java.io.File;
 
@@ -10,16 +13,16 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormPage {
+
+    //Used components
+    CalendComponent calendComponent = new CalendComponent();
+    UserComponent userComponent = new UserComponent();
+    AddressComponent addressComponent = new AddressComponent();
     //Elements
     private SelenideElement
-            firstName = $("#firstName"),
-            lastName = $("#lastName"),
             mail = $("#userEmail"),
             gend = $("#genterWrapper"),
             phone = $("#userNumber"),
-            dateOfBirth =$("#dateOfBirthInput"),
-            monthPicker = $(".react-datepicker__month-select"),
-            yearPicker = $(".react-datepicker__year-select"),
             subj = $("#subjectsInput"),
             nobbies = $("#hobbiesWrapper"),
             photoLoader = $("#uploadPicture"),
@@ -30,7 +33,6 @@ public class RegistrationFormPage {
             closeButton = $("#closeLargeModal"),
             submitButton = $("#submit");
 
-
     //Actions
     public RegistrationFormPage openPage(String hostname) {
         open(hostname);
@@ -40,8 +42,7 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage changeFirstAndLastName(String name, String last) {
-        firstName.setValue(name);
-        lastName.setValue(last);
+        userComponent.setUser(name, last);
         return this;
     }
 
@@ -61,10 +62,7 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setBirthDate(String day, String month, String year) {
-        dateOfBirth.click();
-        monthPicker.selectOption(month);
-        yearPicker.selectOption(year);
-        $(".react-datepicker__day--0"+day).click();
+        calendComponent.setDate(day, month, year);
         return this;
     }
 
@@ -80,11 +78,7 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setAddress(String currentAddress, String state, String city) {
-        address.setValue(currentAddress);
-        stateField.click();
-        $(byText(state)).click();
-        cityField.click();
-        $(byText(city)).click();
+        addressComponent.setAddr(currentAddress, state, city);
         return this;
     }
 
@@ -99,7 +93,7 @@ public class RegistrationFormPage {
                 (text(userMail)),
                 (text(gender)),
                 (text(userNumber)),
-                (text(day+" " + month + "," + year)),
+                (text(day + " " + month + "," + year)),
                 (text(subjects)),
                 (text(hobb)),
                 (text("Photo.png")),
