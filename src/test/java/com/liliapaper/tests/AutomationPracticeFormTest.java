@@ -19,11 +19,14 @@ public class AutomationPracticeFormTest {
     String subjects = "Hindi";
     String currentAddress = faker.address().streetAddress();
     String userMail = faker.internet().emailAddress();
+    String gender = "Female";
     String month = "January";
     String year = "2000";
+    String day = "10";
     String state = "Uttar Pradesh";
     String city = "Agra";
     String hostname = "/automation-practice-form";
+    String hobb = "Sports";
 
     @BeforeAll
     public static void setUp() {
@@ -34,19 +37,21 @@ public class AutomationPracticeFormTest {
     @Test
     public void fillAutomationPracticeFormTest() {
         //заполнение полей
-        registrationFormPage.openPage(hostname);
-        registrationFormPage.changeFirstAndLastName(name, lastName);
-        registrationFormPage.changeEmail(userMail);
-        registrationFormPage.changGender();
-        registrationFormPage.setPhone(userNumber);
-        registrationFormPage.setBirthDate(month, year);
-        registrationFormPage.setHobbies(subjects);
-        registrationFormPage.loadPhoto(file);
-        registrationFormPage.setAddress(currentAddress, state, city);
-        registrationFormPage.submit();
+        registrationFormPage
+                .openPage(hostname)
+                .changeFirstAndLastName(name, lastName)
+                .changeEmail(userMail)
+                .changGender(gender)
+                .setPhone(userNumber)
+                .setBirthDate(day, month, year)
+                .setHobbies(subjects, hobb)
+                .loadPhoto(file)
+                .setAddress(currentAddress, state, city)
+                .submit();
 
         //проверка полей во всплывающем окне
-        registrationFormPage.assertFormsfields(name, lastName, userMail, userNumber, month, year, subjects, currentAddress, state, city);
+        registrationFormPage
+                .assertFormsfields(name, lastName, userMail, userNumber, month, year, subjects, currentAddress, state, city, gender, day, hobb);
 
         //закрытие итоговой формы
         registrationFormPage.closeForm();
