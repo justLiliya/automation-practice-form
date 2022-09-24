@@ -11,87 +11,86 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormPage {
     //Elements
-    private SelenideElement firstName = $("#firstName");
-    private SelenideElement lastName = $("#lastName");
-
-    private SelenideElement mail = $("#userEmail");
-
-    private SelenideElement gend = $("#genterWrapper");
-
-    private SelenideElement phone = $("#userNumber");
-
-    private SelenideElement dateOfBirth =$("#dateOfBirthInput");
-
-    private SelenideElement monthPicker = $(".react-datepicker__month-select");
-
-    private SelenideElement yearPicker = $(".react-datepicker__year-select");
-
-    private SelenideElement subj = $("#subjectsInput");
-    private SelenideElement nobbies = $("#hobbiesWrapper");
-
-    private SelenideElement photoLoader = $("#uploadPicture");
-
-    private SelenideElement address = $("#currentAddress");
-    private SelenideElement stateField = $("#state");
-    private SelenideElement cityField = $("#city");
-
-    private SelenideElement table = $(".table-responsive table");
-
-    private SelenideElement closeButton = $("#closeLargeModal");
-
-    private SelenideElement submitButton = $("#submit");
+    private SelenideElement
+            firstName = $("#firstName"),
+            lastName = $("#lastName"),
+            mail = $("#userEmail"),
+            gend = $("#genterWrapper"),
+            phone = $("#userNumber"),
+            dateOfBirth =$("#dateOfBirthInput"),
+            monthPicker = $(".react-datepicker__month-select"),
+            yearPicker = $(".react-datepicker__year-select"),
+            subj = $("#subjectsInput"),
+            nobbies = $("#hobbiesWrapper"),
+            photoLoader = $("#uploadPicture"),
+            address = $("#currentAddress"),
+            stateField = $("#state"),
+            cityField = $("#city"),
+            table = $(".table-responsive table"),
+            closeButton = $("#closeLargeModal"),
+            submitButton = $("#submit");
 
 
     //Actions
-    public static void openPage(String hostname) {
+    public RegistrationFormPage openPage(String hostname) {
         open(hostname);
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('fixedban').remove()");
+        return this;
     }
 
-    public void changeFirstAndLastName(String name, String last) {
+    public RegistrationFormPage changeFirstAndLastName(String name, String last) {
         firstName.setValue(name);
         lastName.setValue(last);
+        return this;
     }
 
-    public void changeEmail(String userMail) {
+    public RegistrationFormPage changeEmail(String userMail) {
         mail.setValue(userMail);
+        return this;
     }
 
-    public void changGender(String gender) {
+    public RegistrationFormPage changGender(String gender) {
         gend.$(byText(gender)).click();
+        return this;
     }
 
-    public void setPhone(String userNumber) {
+    public RegistrationFormPage setPhone(String userNumber) {
         phone.setValue(userNumber);
+        return this;
     }
 
-    public void setBirthDate(String day, String month, String year) {
+    public RegistrationFormPage setBirthDate(String day, String month, String year) {
         dateOfBirth.click();
         monthPicker.selectOption(month);
         yearPicker.selectOption(year);
         $(".react-datepicker__day--0"+day).click();
+        return this;
     }
 
-    public void setHobbies(String subjects, String hobb) {
+    public RegistrationFormPage setHobbies(String subjects, String hobb) {
         subj.setValue(subjects).pressEnter();
         nobbies.$(byText(hobb)).click();
+        return this;
     }
 
-    public void loadPhoto(File file) {
+    public RegistrationFormPage loadPhoto(File file) {
         photoLoader.uploadFile(file);
+        return this;
     }
 
-    public void setAddress(String currentAddress, String state, String city) {
+    public RegistrationFormPage setAddress(String currentAddress, String state, String city) {
         address.setValue(currentAddress);
         stateField.click();
         $(byText(state)).click();
         cityField.click();
         $(byText(city)).click();
+        return this;
     }
 
-    public void submit() {
+    public RegistrationFormPage submit() {
         submitButton.shouldBe(visible).click();
+        return this;
     }
 
     public void assertFormsfields(String name, String lastName, String userMail, String userNumber, String month, String year, String subjects, String currentAddress, String state, String city, String gender, String day, String hobb) {

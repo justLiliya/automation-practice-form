@@ -37,16 +37,17 @@ public class AutomationPracticeFormTest {
     @Test
     public void fillAutomationPracticeFormTest() {
         //заполнение полей
-        registrationFormPage.openPage(hostname);
-        registrationFormPage.changeFirstAndLastName(name, lastName);
-        registrationFormPage.changeEmail(userMail);
-        registrationFormPage.changGender(gender);
-        registrationFormPage.setPhone(userNumber);
-        registrationFormPage.setBirthDate(day, month, year);
-        registrationFormPage.setHobbies(subjects, hobb);
-        registrationFormPage.loadPhoto(file);
-        registrationFormPage.setAddress(currentAddress, state, city);
-        registrationFormPage.submit();
+        registrationFormPage
+                .openPage(hostname)
+                .changeFirstAndLastName(name, lastName)
+                .changeEmail(userMail)
+                .changGender(gender)
+                .setPhone(userNumber)
+                .setBirthDate(day, month, year)
+                .setHobbies(subjects, hobb)
+                .loadPhoto(file)
+                .setAddress(currentAddress, state, city)
+                .submit();
 
         //проверка полей во всплывающем окне
         registrationFormPage.assertFormsfields(name, lastName, userMail, userNumber, month, year, subjects, currentAddress, state, city, gender, day, hobb);
