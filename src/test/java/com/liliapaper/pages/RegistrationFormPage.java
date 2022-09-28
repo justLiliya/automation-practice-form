@@ -1,4 +1,5 @@
 package com.liliapaper.pages;
+
 import com.codeborne.selenide.SelenideElement;
 import com.liliapaper.pages.components.AddressComponent;
 import com.liliapaper.pages.components.CalendComponent;
@@ -21,6 +22,8 @@ public class RegistrationFormPage {
 
     //Elements
     private SelenideElement
+            firstName = $("#firstName"),
+            lastName = $("#lastName"),
             mail = $("#userEmail"),
             gend = $("#genterWrapper"),
             phone = $("#userNumber"),
@@ -87,8 +90,9 @@ public class RegistrationFormPage {
         return this;
     }
 
-    public void assertFormsfields(String name, String lastName, String userMail, String userNumber, String month, String year, String subjects, String currentAddress, String state, String city, String gender, String day, String hobb) {
-        resultTableComponent.checkResult(name, lastName, userMail, userNumber, month, year, subjects, currentAddress, state, city, gender, day, hobb);
+    public RegistrationFormPage assertFormsfields(String nomination, String sample) {
+        resultTableComponent.checkResult(nomination, sample);
+        return this;
     }
 
     public void closeForm() {
