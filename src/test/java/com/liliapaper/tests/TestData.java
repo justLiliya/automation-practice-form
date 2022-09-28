@@ -23,4 +23,6 @@ public class TestData {
     String city = "Agra";
     String hostname = "/automation-practice-form";
     String hobb = "Sports";
+    String fileName = "Photo.png";
+    String birthDay = day + " " + month + "," + year;
 }

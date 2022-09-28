@@ -5,8 +5,9 @@ import com.liliapaper.pages.RegistrationFormPage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class AutomationPracticeFormTest extends TestData {
+public class AutomationPracticeFormTest {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
+    TestData testData = new TestData();
 
     @BeforeAll
     public static void setUp() {
@@ -18,20 +19,30 @@ public class AutomationPracticeFormTest extends TestData {
     public void fillAutomationPracticeFormTest() {
         //заполнение полей
         registrationFormPage
-                .openPage(hostname)
-                .changeFirstAndLastName(name, lastName)
-                .changeEmail(userMail)
-                .changGender(gender)
-                .setPhone(userNumber)
-                .setBirthDate(day, month, year)
-                .setHobbies(subjects, hobb)
-                .loadPhoto(file)
-                .setAddress(currentAddress, state, city)
+                .openPage(testData.hostname)
+                .changeFirstAndLastName(testData.name, testData.lastName)
+                .changeEmail(testData.userMail)
+                .changGender(testData.gender)
+                .setPhone(testData.userNumber)
+                .setBirthDate(testData.day, testData.month, testData.year)
+                .setHobbies(testData.subjects, testData.hobb)
+                .loadPhoto(testData.file)
+                .setAddress(testData.currentAddress, testData.state, testData.city)
                 .submit();
 
         //проверка полей во всплывающем окне
         registrationFormPage
-                .assertFormsfields(name, lastName, userMail, userNumber, month, year, subjects, currentAddress, state, city, gender, day, hobb);
+                .assertFormsfields("Student Name", testData.name + " " + testData.lastName)
+                .assertFormsfields("Student Email", testData.userMail)
+                .assertFormsfields("Gender", testData.gender)
+                .assertFormsfields("Mobile", testData.userNumber)
+                .assertFormsfields("Date of Birth", testData.birthDay)
+                .assertFormsfields("Subjects", testData.subjects)
+                .assertFormsfields("Hobbies", testData.hobb)
+                .assertFormsfields("Picture", testData.fileName)
+                .assertFormsfields("Address", testData.currentAddress)
+                .assertFormsfields("State and City", testData.state + " " + testData.city);
+
 
         //закрытие итоговой формы
         registrationFormPage.closeForm();
