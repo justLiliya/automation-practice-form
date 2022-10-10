@@ -1,4 +1,4 @@
-package com.liliapaper.tests;
+package com.liliapaper.helpers;
 
 import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;

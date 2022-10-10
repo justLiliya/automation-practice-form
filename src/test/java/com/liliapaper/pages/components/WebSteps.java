@@ -2,7 +2,7 @@ package com.liliapaper.pages.components;
 
 import com.codeborne.selenide.WebDriverRunner;
 import com.liliapaper.pages.RegistrationFormPage;
-import com.liliapaper.tests.TestData;
+import com.liliapaper.helpers.TestData;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
@@ -51,5 +51,4 @@ public class WebSteps {
     public byte[] attachScreenshot() {
         return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
-
 }
