@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.liliapaper.helpers.Attach;
+import com.liliapaper.helpers.TestData;
 import com.liliapaper.pages.RegistrationFormPage;
 import com.liliapaper.pages.components.WebSteps;
 import io.qameta.allure.Allure;
@@ -16,8 +17,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.nio.charset.StandardCharsets;
 
 public class AutomationPracticeFormTest {
-    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
-    TestData testData = new TestData();
     WebSteps steps = new WebSteps();
 
     @BeforeAll
