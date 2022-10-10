@@ -8,21 +8,21 @@ import java.io.File;
 public class TestData {
 
     Faker faker = new Faker();
-    File file = new File("src/test/resources/Photo.png");
-    String name = faker.name().firstName();
-    String lastName = faker.name().lastName();
-    String userNumber = RandomStringUtils.randomNumeric(10, 10);
-    String subjects = "Hindi";
-    String currentAddress = faker.address().streetAddress();
-    String userMail = faker.internet().emailAddress();
-    String gender = "Female";
-    String month = "January";
-    String year = "2000";
-    String day = "10";
-    String state = "Uttar Pradesh";
-    String city = "Agra";
-    String hostname = "/automation-practice-form";
-    String hobb = "Sports";
-    String fileName = "Photo.png";
-    String birthDay = day + " " + month + "," + year;
+    public File file = new File("src/test/resources/Photo.png");
+    public String name = faker.name().firstName();
+    public String lastName = faker.name().lastName();
+    public String userNumber = RandomStringUtils.randomNumeric(10, 10);
+    public String subjects = "Hindi";
+    public String currentAddress = faker.address().streetAddress();
+    public String userMail = faker.internet().emailAddress();
+    public String gender = "Female";
+    public String month = "January";
+    public String year = "2000";
+    public String day = "10";
+    public String state = "Uttar Pradesh";
+    public String city = "Agra";
+    public String hostname = "/automation-practice-form";
+    public String hobb = "Sports";
+    public String fileName = "Photo.png";
+    public String birthDay = day + " " + month + "," + year;
 }

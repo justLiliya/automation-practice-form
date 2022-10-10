@@ -1,13 +1,37 @@
 package com.liliapaper.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import com.liliapaper.helpers.Attach;
 import com.liliapaper.pages.RegistrationFormPage;
+import com.liliapaper.pages.components.WebSteps;
+import io.qameta.allure.Allure;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.nio.charset.StandardCharsets;
 
 public class AutomationPracticeFormTest {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
     TestData testData = new TestData();
+    WebSteps steps = new WebSteps();
+
+    @BeforeAll
+    static void configure() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+
+        Configuration.browserCapabilities = capabilities;
+        Configuration.holdBrowserOpen = true;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+    }
 
     @BeforeAll
     public static void setUp() {
@@ -18,33 +42,28 @@ public class AutomationPracticeFormTest {
     @Test
     public void fillAutomationPracticeFormTest() {
         //заполнение полей
-        registrationFormPage
-                .openPage(testData.hostname)
-                .changeFirstAndLastName(testData.name, testData.lastName)
-                .changeEmail(testData.userMail)
-                .changGender(testData.gender)
-                .setPhone(testData.userNumber)
-                .setBirthDate(testData.day, testData.month, testData.year)
-                .setHobbies(testData.subjects, testData.hobb)
-                .loadPhoto(testData.file)
-                .setAddress(testData.currentAddress, testData.state, testData.city)
-                .submit();
-
+        steps.openAndFillForm();
+        steps.attachScreenshot();//пример вызова скриншота в тесте
         //проверка полей во всплывающем окне
-        registrationFormPage
-                .assertFormsfields("Student Name", testData.name + " " + testData.lastName)
-                .assertFormsfields("Student Email", testData.userMail)
-                .assertFormsfields("Gender", testData.gender)
-                .assertFormsfields("Mobile", testData.userNumber)
-                .assertFormsfields("Date of Birth", testData.birthDay)
-                .assertFormsfields("Subjects", testData.subjects)
-                .assertFormsfields("Hobbies", testData.hobb)
-                .assertFormsfields("Picture", testData.fileName)
-                .assertFormsfields("Address", testData.currentAddress)
-                .assertFormsfields("State and City", testData.state + " " + testData.city);
-
-
+        steps.checkForm();
+        steps.attachScreenshot();
         //закрытие итоговой формы
-        registrationFormPage.closeForm();
+        steps.closeForm();
+        steps.attachScreenshot();
+        Allure.getLifecycle().addAttachment(//пример добавления скриншота в тесте
+                "Исходники страницы",
+                "text/html",
+                "html",
+                WebDriverRunner.getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8)
+        );
+    }
+
+
+    @AfterEach
+    void AddAttachments() {
+        Attach.screenshotAs("Last screenshots");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
     }
 }
